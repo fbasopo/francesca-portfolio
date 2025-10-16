@@ -5,20 +5,26 @@ const projects = [
     {
         title: 'Web Crawler (demo)',
         desc: 'A simplified C# concurrent crawler showcasing async patterns, link parsing and error handling. (Recreated from scratch — safe to share).',
-        tags: ['C#', '.NET', 'Async'],
-        repo: 'https://github.com/your-username/web-crawler-demo'
+        tags: ['C#', '.NET', 'Async','Tests'],
+        repo: 'https://github.com/fbasopo/web-crawler-demo'
     },
     {
         title: 'Portfolio (This site)',
         desc: 'Next.js + Tailwind + Framer Motion — the code powering this portfolio.',
         tags: ['React', 'Next.js', 'Tailwind'],
-        repo: 'https://github.com/your-username/portfolio'
+        repo: 'https://github.com/fbasopo/francesca-portfolio'
     },
     {
-        title: 'Mini API App',
+        title: 'Mini Expenses Tracker',
         desc: 'Small full-stack demo: API (C#) + React frontend showing integration and testing patterns.',
-        tags: ['Full Stack', 'Tests'],
-        repo: 'https://github.com/your-username/mini-api-app'
+        tags: ['Full Stack', 'C#', 'React'],
+        repo: 'https://github.com/fbasopo/mini-expenses-tracker'
+    },
+    {
+        title: 'MFA Redirect Frontend',
+        desc: 'A React frontend for handling multi-factor authentication redirects, built with TypeScript and Tailwind CSS.',
+        tags: ['React', 'TypeScript', 'Tailwind'],
+        repo: 'https://github.com/fbasopo/mfa-redirect-frontend'
     }
 ]
 
@@ -37,28 +43,19 @@ export default function Projects() {
                 <CodeEmbed
                     title="Example: Simplified LINQ async query (C#)"
                     snippet={`// Simplified example — safe to share
-        public async Task<List<string>> FetchUrlsAsync(string startUrl)
+        private async Task CrawlInternal(string url, int depth, List<string> results)
         {
-            var client = new HttpClient();
-            var html = await client.GetStringAsync(startUrl);
-            // parse links (simplified)
-            var links = HtmlParser.ParseLinks(html);
-            return links;
-        }`}
-                    repo="https://github.com/your-username/web-crawler-demo"
-                />
+            if (depth < 0) return;
+            if (!_visited.TryAdd(url, true)) return;
 
-                <pre className="code-pre mt-4"><code>{`// Simplified example — safe to share
-        public async Task<List<string>> FetchUrlsAsync(string startUrl)
-        {
-        var client = new HttpClient();
-            var html = await client.GetStringAsync(startUrl);
-            // parse links (simplified)
-            var links = HtmlParser.ParseLinks(html);
-            return links;
-        }`}
-</code></pre>
-            </div>
+            try
+            {
+                var html = await _http.GetStringAsync(url);
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);`}
+                    repo="https://github.com/fbasopo/web-crawler-demo"
+                />
+         </div>
         </section>
     )
 }
